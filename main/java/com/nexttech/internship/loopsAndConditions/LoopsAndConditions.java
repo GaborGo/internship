@@ -43,11 +43,13 @@ public class LoopsAndConditions {
         Random random = new Random();  //generate random boolean
         int numberToFind = random.nextInt(1000);
         Scanner scanner = new Scanner(System.in);
+
         label:
         for (int i = 0; i < 100; i++) {
             System.out.println("Guess the number: ");
             int userInputNumber;
             String userInputString = scanner.next();
+
             switch (userInputString) {
                 case "r":
                     numberToFind = random.nextInt(1000);
@@ -66,7 +68,7 @@ public class LoopsAndConditions {
                     System.out.println("MoveMode enabled: " + isMoveModeEnabled);
                     continue;
                 default:
-                    if (checkIfInputIsNumber(userInputString))
+                    if (isInputNumber(userInputString))
                         userInputNumber = Integer.parseInt(userInputString);
                     else
                         continue;
@@ -105,7 +107,7 @@ public class LoopsAndConditions {
         scanner.close();
     }
 
-    static boolean checkIfInputIsNumber(String userInputString) {
+    static boolean isInputNumber(String userInputString) {
         try {
             Integer.parseInt(userInputString);
             return true;
@@ -130,16 +132,18 @@ public class LoopsAndConditions {
         String userInput = scanner.next();
         String result;
         if (isInputValid(userInput))
-            solution = getRandomString();
-        else
+            solution = getRandomFiveNumberString();
+        else {
+            System.out.println("Invalid input. Please enter a five number sequence.");
             return null;
+        }
         result = getStringFromComparingMatchingCharacters(userInput, solution);
         scanner.close();
         System.out.println("Mentalist string: " + solution + "\nSolution: " + userInput + "\nResult: " + result);
         return result;
     }
 
-    public static String getRandomString() {
+    public static String getRandomFiveNumberString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < 5; i++)
             stringBuilder.append((int) (Math.random() * 10));
@@ -166,12 +170,12 @@ public class LoopsAndConditions {
     }
 
     public static double getResultFromPolishCalculator(String equation) {
-        String operands = "+-*/";
+        String operators = "+-*/";
         //Make ArrayList from input String
         List<String> listOfElements = new ArrayList<>(Arrays.asList(equation.split(" ")));
         //Exit point from recursion
         if (listOfElements.size() < 4) {
-            return Double.parseDouble(calculateSinglePolishEquation(listOfElements));
+            return Double.parseDouble(getResultFromSingleCalculation(listOfElements));
         }
         //Create a copy of listOfElements, which will be used for recursion
         List<String> updatedList = new ArrayList<>(listOfElements);
@@ -180,11 +184,11 @@ public class LoopsAndConditions {
         for (int i = 0; i < listOfElements.size(); i++) {
             List<String> singleOperationElements;
             // check for operand occurrences
-            if (operands.contains(listOfElements.get(i))) {
+            if (operators.contains(listOfElements.get(i))) {
                 // extract first single operation elements
                 singleOperationElements = listOfElements.subList(i - 2, i + 1);
                 //Insert result of first operation at the beginning
-                updatedList.add(i + 1, calculateSinglePolishEquation(singleOperationElements));
+                updatedList.add(i + 1, getResultFromSingleCalculation(singleOperationElements));
                 //Remove operated elements
                 updatedList.remove(i);
                 updatedList.remove(i - 1);
@@ -203,11 +207,12 @@ public class LoopsAndConditions {
                 .collect(Collectors.joining()).substring(1);
     }
     //Calculate from a list with 2 numbers and an operand
-    public static String calculateSinglePolishEquation(List<String> list) {
+    public static String getResultFromSingleCalculation(List<String> list) {
         double firstNumber = Double.parseDouble(list.get(0));
         double secondNumber = Double.parseDouble(list.get(1));
-        String operand = list.get(2);
-        switch (operand) {
+        String operator = list.get(2);
+
+        switch (operator) {
             case "+":
                 return "" + (firstNumber + secondNumber);
             case "-":
@@ -217,6 +222,8 @@ public class LoopsAndConditions {
             case "/":
                 return "" + (firstNumber / secondNumber);
         }
-        return null;
+
+        System.out.println("Wrong input. Please enter a valid polish equation String!");
+        return "";
     }
 }
