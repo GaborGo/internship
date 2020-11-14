@@ -179,7 +179,6 @@ public class LoopsAndConditions {
         }
         //Create a copy of listOfElements, which will be used for recursion
         List<String> updatedList = new ArrayList<>(listOfElements);
-        System.out.println(listOfElements);
         //Iterate through list
         for (int i = 0; i < listOfElements.size(); i++) {
             List<String> singleOperationElements;

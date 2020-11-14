@@ -59,7 +59,7 @@ public class LambdasOnStreams {
 
     //Given Person objects with name, age, nationality. Write a method that filter all persons
     //with Romanian nationality, name start with letter “a”, over 18 and sort them after age.
-    public static List<Person> getAllRomanianMajorsNameStartingWithA(List<Person> list) {
+    public static List<Person> getAllRomanianMajorsNameStartingWithASortedByAge(List<Person> list) {
         return list.stream()
                 .filter( n -> (n.getAge() > 17 && n.getNationality().equals("Romanian") && n.getName().charAt(0) == 'A'))
                 .collect(Collectors.toList());
@@ -68,7 +68,7 @@ public class LambdasOnStreams {
     // Library Search
     // Get the unique surnames in uppercase of the first 7 book authors that are 66 years old or older.
 
-    public static List<String> getFirstSevenOlderThanSixtyFiveUniqueSurnamesInUpperCase (List<Author> authors) {
+    public static List<String> getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitSeven(List<Author> authors) {
         Set<Author> result = new HashSet<>();
         result.addAll(authors.stream()
                 .filter( n -> n.getAge() > 65 )

@@ -107,7 +107,7 @@ public class LambdasOnStreamsTest {
 
     @Test
     void testGetAllRomanianMajorsNameStartingWithA() {
-        List<Person> result = LambdasOnStreams.getAllRomanianMajorsNameStartingWithA(personList);
+        List<Person> result = LambdasOnStreams.getAllRomanianMajorsNameStartingWithASortedByAge(personList);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, result.size()),
                 () -> Assertions.assertEquals("Romanian", result.get(0).getNationality())
@@ -116,7 +116,7 @@ public class LambdasOnStreamsTest {
 
     @Test
     void testGetFirstSevenOlderThanSixtyFiveUniqueSurnamesInUpperCase() {
-        List<String> result = LambdasOnStreams.getFirstSevenOlderThanSixtyFiveUniqueSurnamesInUpperCase(authorList);
+        List<String> result = LambdasOnStreams.getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitSeven(authorList);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(result.size() < 8),
                 () -> Assertions.assertFalse(result.contains("CONNOR")),
