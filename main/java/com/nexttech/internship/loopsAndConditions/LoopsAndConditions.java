@@ -11,25 +11,32 @@ public class LoopsAndConditions {
 //    The program will allow the user maximum 3 retries after which it will stop with the message 'You lost'.
 
     public static void startGuessTheNumber() {
-        int numberToFind = (int) (Math.random() * 10);
-        Scanner sc = new Scanner(System.in);
         System.out.println("Guess the number: ");
-        int userInput = sc.nextInt();
+        if (wasNumberGuessed())
+            System.out.println("You won!");
+         else
+            System.out.println("You lost!");
+    }
+
+    public static boolean wasNumberGuessed() {
+        int numberToFind = (int) (Math.random() * 10);
+        boolean isNumberGuessed = false;
+        Scanner sc = new Scanner(System.in);
 
         for (int i = 0; i < 3; i++) {
-            if (i > 0)
-                userInput = sc.nextInt();
+            int  userInput = sc.nextInt();
             if (userInput > numberToFind) {
                 System.out.println("Wrong answer, your number it too high!");
             } else if (userInput < numberToFind) {
                 System.out.println("Wrong answer, your number it too low!");
             } else {
-                System.out.println("You won! Number is: " + numberToFind);
+                isNumberGuessed = true;
                 break;
             }
         }
-        System.out.println("You lost! Solution was: " + numberToFind);
-        sc.close();
+         System.out.println("Number was: " + numberToFind);
+         sc.close();
+         return isNumberGuessed;
     }
 
     //Improve “Guess the number game”. In this version, will let the user to guess several times (with responses each time) until he finds the number.
@@ -205,7 +212,7 @@ public class LoopsAndConditions {
                 .map(n -> " " + n)
                 .collect(Collectors.joining()).substring(1);
     }
-    //Calculate from a list with 2 numbers and an operand
+    //Calculate from a list with 2 numbers and an operator
     public static String getResultFromSingleCalculation(List<String> list) {
         double firstNumber = Double.parseDouble(list.get(0));
         double secondNumber = Double.parseDouble(list.get(1));
