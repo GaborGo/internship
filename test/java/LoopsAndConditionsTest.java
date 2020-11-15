@@ -1,4 +1,3 @@
-import com.nexttech.internship.lambdasOnStreams.LambdasOnStreams;
 import com.nexttech.internship.loopsAndConditions.LoopsAndConditions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,6 +7,21 @@ import java.util.List;
 
 
 public class LoopsAndConditionsTest {
+
+    @Test
+    void testGetStringFromComparingMatchingCharacters() {
+       Assertions.assertEquals("*****" ,
+               LoopsAndConditions.getStringFromComparingMatchingCharacters("12345", "12345"));
+        Assertions.assertEquals("*****" ,
+                LoopsAndConditions.getStringFromComparingMatchingCharacters("00000", "00000"));
+        Assertions.assertEquals("+++++" ,
+                LoopsAndConditions.getStringFromComparingMatchingCharacters("12345", "53421"));
+        Assertions.assertEquals("*" ,
+                LoopsAndConditions.getStringFromComparingMatchingCharacters("12345", "17890"));
+        Assertions.assertEquals("**" ,
+                LoopsAndConditions.getStringFromComparingMatchingCharacters("12345", "10005"));
+    }
+
     @Test
     void testGetResultFromPolishCalculator() {
         Assertions.assertEquals(20, LoopsAndConditions.getResultFromPolishCalculator("3 4 * 8 +"));

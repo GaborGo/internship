@@ -1,7 +1,6 @@
 package com.nexttech.internship.lambdasOnStreams;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,7 +45,7 @@ public class LambdasOnStreams {
     public static Person getOldestPersonInList(List<Person> persons) {
         return persons.stream()
                 .max(Comparator.comparing(Person::getAge))
-                .get();
+                .orElse(null);
     }
 
     //Given Person objects with name, age, nationality. Write a method that will return all
@@ -67,13 +66,10 @@ public class LambdasOnStreams {
 
     // Library Search
     // Get the unique surnames in uppercase of the first 7 book authors that are 66 years old or older.
-
-    public static List<String> getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitSeven(List<Author> authors) {
-        Set<Author> result = new HashSet<>();
-        result.addAll(authors.stream()
-                .filter( n -> n.getAge() > 65 )
-                .limit(7)
-                .collect(Collectors.toList()));
+    public static List<String> getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitFirstSeven(List<Author> authors) {
+        Set<Author> result = authors.stream()
+                .filter(n -> n.getAge() > 65)
+                .limit(7).collect(Collectors.toSet());
         return result.stream()
                 .map( n -> n.getFirstName().toUpperCase())
                 .collect(Collectors.toList());
@@ -82,10 +78,9 @@ public class LambdasOnStreams {
     public static int printSumOfAgesOfFemaleAuthorsBelowTwentyFive(List<Author> authors) {
       int result =  authors.stream()
                 .filter( n -> n.getAge() < 25 && n.getGender().equals("Female") )
-                .map( n -> n.getAge() )
+                .map(Author::getAge)
                 .mapToInt(Integer::intValue)
                 .sum();
-      System.out.println(result);
       return result;
     }
 }

@@ -116,7 +116,7 @@ public class LambdasOnStreamsTest {
 
     @Test
     void testGetFirstSevenOlderThanSixtyFiveUniqueSurnamesInUpperCase() {
-        List<String> result = LambdasOnStreams.getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitSeven(authorList);
+        List<String> result = LambdasOnStreams.getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitFirstSeven(authorList);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(result.size() < 8),
                 () -> Assertions.assertFalse(result.contains("CONNOR")),
