@@ -178,41 +178,34 @@ public class MethodsLoopsAndConditions {
 
     public static double getResultFromPolishCalculator(String equation) {
         String operators = "+-*/";
-        //Make ArrayList from input String
         List<String> listOfElements = new ArrayList<>(Arrays.asList(equation.split(" ")));
-        //Exit point from recursion
+
         if (listOfElements.size() < 4) {
             return Double.parseDouble(getResultFromSingleCalculation(listOfElements));
         }
-        //Create a copy of listOfElements, which will be used for recursion
+
         List<String> updatedList = new ArrayList<>(listOfElements);
-        //Iterate through list
+
         for (int i = 0; i < listOfElements.size(); i++) {
             List<String> singleOperationElements;
-            // check for operand occurrences
             if (operators.contains(listOfElements.get(i))) {
-                // extract first single operation elements
                 singleOperationElements = listOfElements.subList(i - 2, i + 1);
-                //Insert result of first operation at the beginning
                 updatedList.add(i + 1, getResultFromSingleCalculation(singleOperationElements));
-                //Remove operated elements
                 updatedList.remove(i);
                 updatedList.remove(i - 1);
                 updatedList.remove(i - 2);
                 break;
             }
         }
-        //Call method recursively
         return getResultFromPolishCalculator(getStringFromList(updatedList));
     }
 
-    //Create String from list
     public static String getStringFromList(List<String> list) {
         return list.stream()
                 .map(n -> " " + n)
                 .collect(Collectors.joining()).substring(1);
     }
-    //Calculate from a list with 2 numbers and an operator
+
     public static String getResultFromSingleCalculation(List<String> list) {
         double firstNumber = Double.parseDouble(list.get(0));
         double secondNumber = Double.parseDouble(list.get(1));
