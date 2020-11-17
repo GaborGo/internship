@@ -16,7 +16,7 @@ public class DBConnection {
     final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     final String URL = "jdbc:mysql://localhost:3306/contapp";
     final String USERNAME = "root";
-    final String PASSWORD = "Bancpost.12";
+    final String PASSWORD = "pass";
     private Connection conn = null;
     private Statement statement = null;
 
