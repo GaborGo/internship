@@ -1,4 +1,4 @@
-package com.nexttech.internship.lambdasOnStreams;
+package com.nexttech.internship.SortingMethodsWithLambdasOnStreams;
 
 public class Person {
     private String name;

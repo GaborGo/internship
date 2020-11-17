@@ -1,9 +1,9 @@
-package com.nexttech.internship.loopsAndConditions;
+package com.nexttech.internship.MethodsWithLoopsAndConditions;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LoopsAndConditions {
+public class MethodsLoopsAndConditions {
 
 //    Write a “Guess the number” game. Program will generate a random number and will ask the user to guess it.
 //    If the user guesses the number, the program will stop.

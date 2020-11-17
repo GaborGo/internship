@@ -1,6 +1,6 @@
-import com.nexttech.internship.lambdasOnStreams.Author;
-import com.nexttech.internship.lambdasOnStreams.LambdasOnStreams;
-import com.nexttech.internship.lambdasOnStreams.Person;
+import com.nexttech.internship.SortingMethodsWithLambdasOnStreams.Author;
+import com.nexttech.internship.SortingMethodsWithLambdasOnStreams.SortingMethodsWithLambdasOnStreams;
+import com.nexttech.internship.SortingMethodsWithLambdasOnStreams.Person;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LambdasOnStreamsTest {
+public class SortingMethodsWithLambdasOnStreamsTest {
     static List<String> listOfStrings = new ArrayList<>();
     static List<Integer> integerList = new ArrayList<>();
     static List<Person> personList = new ArrayList<>();
@@ -48,7 +48,7 @@ public class LambdasOnStreamsTest {
     @Test
     @DisplayName("Test if all strings are UpperCase")
     void testGetAllElementsUpperCase() {
-        List<String> result = LambdasOnStreams.getAllElementsUpperCase(listOfStrings);
+        List<String> result = SortingMethodsWithLambdasOnStreams.getAllElementsUpperCase(listOfStrings);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(listOfStrings.size(), result.size());
         Assertions.assertEquals("JAPAN", result.get(0));
@@ -57,7 +57,7 @@ public class LambdasOnStreamsTest {
     @Test
     @DisplayName("Test strings have length of 5, and contains 'n'")
     void testGetAllOfLengthFiveContainingCharn() {
-        List<String> result = LambdasOnStreams.getAllOfLengthFiveContainingCharn(listOfStrings);
+        List<String> result = SortingMethodsWithLambdasOnStreams.getAllOfLengthFiveContainingCharn(listOfStrings);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(result.get(0).contains("n")),
                 () -> Assertions.assertNotNull(result),
@@ -69,7 +69,7 @@ public class LambdasOnStreamsTest {
     @Test
     @DisplayName("Test elements that start with 'n', made UpperCase, Sorted")
     void testGetAllStartingWithnUpperCasedSorted() {
-        List<String> result = LambdasOnStreams.getAllStartingWithnUpperCasedSorted(listOfStrings);
+        List<String> result = SortingMethodsWithLambdasOnStreams.getAllStartingWithnUpperCasedSorted(listOfStrings);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(2, result.size()),
                 () -> Assertions.assertEquals('N', result.get(0).charAt(0)),
@@ -81,7 +81,7 @@ public class LambdasOnStreamsTest {
     @Test
     @DisplayName("Test returned String has numbers preceded by even/odd")
     void testGetOddEvenNumberString() {
-        String result = LambdasOnStreams.getOddEvenNumberString(integerList);
+        String result = SortingMethodsWithLambdasOnStreams.getOddEvenNumberString(integerList);
         Assertions.assertAll(
                 () -> Assertions.assertEquals("o1", result.substring(0, 2)),
                 () -> Assertions.assertEquals(result.length(), 15),
@@ -92,13 +92,13 @@ public class LambdasOnStreamsTest {
     @Test
     @DisplayName("Get oldest person from list")
     void testGetOldestPersonInList() {
-        Person person = LambdasOnStreams.getOldestPersonInList(personList);
+        Person person = SortingMethodsWithLambdasOnStreams.getOldestPersonInList(personList);
         Assertions.assertEquals(30, person.getAge());
     }
 
     @Test
     void testGetAllUnderAgePersons() {
-        List<Person> result = LambdasOnStreams.getAllUnderAgePersons(personList);
+        List<Person> result = SortingMethodsWithLambdasOnStreams.getAllUnderAgePersons(personList);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(2, result.size()),
                 () -> Assertions.assertTrue(result.get(0).getAge() < 18)
@@ -107,7 +107,7 @@ public class LambdasOnStreamsTest {
 
     @Test
     void testGetAllRomanianMajorsNameStartingWithA() {
-        List<Person> result = LambdasOnStreams.getAllRomanianMajorsNameStartingWithASortedByAge(personList);
+        List<Person> result = SortingMethodsWithLambdasOnStreams.getAllRomanianMajorsNameStartingWithASortedByAge(personList);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, result.size()),
                 () -> Assertions.assertEquals("Romanian", result.get(0).getNationality())
@@ -116,7 +116,7 @@ public class LambdasOnStreamsTest {
 
     @Test
     void testGetFirstSevenOlderThanSixtyFiveUniqueSurnamesInUpperCase() {
-        List<String> result = LambdasOnStreams.getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitFirstSeven(authorList);
+        List<String> result = SortingMethodsWithLambdasOnStreams.getUniqueSurnamesInUpperCaseForOlderThanSixtyFiveLimitFirstSeven(authorList);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(result.size() < 8),
                 () -> Assertions.assertFalse(result.contains("CONNOR")),
@@ -126,7 +126,7 @@ public class LambdasOnStreamsTest {
 
     @Test
     void testPrintSumOfAgesOfFemaleAuthorsBelowTwentyFive() {
-        int result = LambdasOnStreams.printSumOfAgesOfFemaleAuthorsBelowTwentyFive(authorList);
+        int result = SortingMethodsWithLambdasOnStreams.printSumOfAgesOfFemaleAuthorsBelowTwentyFive(authorList);
         Assertions.assertEquals(46, result);
     }
 
