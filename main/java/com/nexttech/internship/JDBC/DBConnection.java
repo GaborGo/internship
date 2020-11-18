@@ -16,22 +16,21 @@ public class DBConnection {
     final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     final String URL = "jdbc:mysql://localhost:3306/contapp";
     final String USERNAME = "root";
-    final String PASSWORD = "pass";
+    final String PASSWORD = "passs";
     private Connection conn = null;
     private Statement statement = null;
 
     public DBConnection() {
         try {
             Class.forName(JDBC_DRIVER);
+            try {
+                conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                System.out.println("Connected to DB.");
+            } catch (SQLException ex) {
+                System.out.println("Err: " + ex);
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-
-        try {
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Connected to DB.");
-        } catch (SQLException ex) {
-            System.out.println("Err: " + ex);
         }
 
         if (conn != null) {
@@ -44,14 +43,15 @@ public class DBConnection {
     }
 
     //1 select toate facturile firmei mele care au fost platite prin banca
-    public void printAllInvoicesPayedOnlineForFirmWithId(int id) {
+    public void printAllInvoicesByPaymentTypeForFirmWithId(String payType, int id) {
         String selectSql =
-                "SELECT * FROM contapp.invoices RIGHT JOIN payments ON invoices.invoice_ID = payments.payment_ID RIGHT JOIN suppliers " +
-                        "ON suppliers.supplier_ID = invoices.supplier_ID " +
-                        "RIGHT JOIN firms " +
+                "SELECT * FROM contapp.invoices " +
+                        "JOIN payments ON payments.invoice_ID = invoices.invoice_ID " +
+                        "JOIN suppliers ON suppliers.supplier_ID = invoices.supplier_ID " +
+                        "JOIN firms " +
                         "ON suppliers.firm_ID = firms.firm_ID " +
-                        "AND payments.type = \"bank\" " +
-                        "AND firms.firm_ID = " + id;
+                        "AND payments.type = " + "'" + payType + "'" +
+                        " AND firms.firm_ID = " + id;
         try {
             ResultSet resultSet = statement.executeQuery(selectSql);
             List<Invoice> invoices = new ArrayList<>();
@@ -80,9 +80,9 @@ public class DBConnection {
     //2.select toate facturile pe care le nu le-am platit, ordonate dupa data de scadenta cele care au scadenta cel mai urgent sa imi apara primele
     public void printAllScadentInvoicesOrderedByDueTimeForFirmWithId(int firmId) {
         String selectSql = "SELECT * FROM contapp.invoices " +
-                "RIGHT JOIN suppliers " +
+                "JOIN suppliers " +
                 "ON suppliers.supplier_ID = invoices.supplier_ID " +
-                "RIGHT JOIN firms " +
+                "JOIN firms " +
                 "ON suppliers.firm_ID = firms.firm_ID " +
                 "WHERE sold > 0 AND firms.firm_ID = " + firmId +
                 " ORDER BY scadent_Date ASC;";
@@ -109,15 +109,14 @@ public class DBConnection {
         } catch (Exception ex) {
             System.out.println("Unable to retrieve results. " + ex);
         }
-        closeConnection();
     }
 
     // toate facturile de la electrica
     public void printAllInvoicesFromSupplierForFirmWithId(String supplier, int firmId) {
         String selectSql = "SELECT * FROM contapp.invoices " +
-                "RIGHT JOIN suppliers " +
+                "JOIN suppliers " +
                 "ON suppliers.supplier_ID = invoices.supplier_ID " +
-                "RIGHT JOIN firms " +
+                "JOIN firms " +
                 "ON suppliers.firm_ID = firms.firm_ID " +
                 "WHERE suppliers.name = " + "'" + supplier + "'" +
                 " AND firms.firm_ID = " + firmId;
@@ -144,18 +143,17 @@ public class DBConnection {
         } catch (Exception ex) {
             System.out.println("Unable to retrieve results. " + ex);
         }
-        closeConnection();
     }
 
     //toate facturile Orange din ultimul an
     public void printAllInvoicesFromDateForSupplierForFirmWithId(String beginDate, String supplier, int firmId) {
         String selectSql = "SELECT * FROM contapp.invoices " +
-                "RIGHT JOIN suppliers " +
+                "JOIN suppliers " +
                 "ON suppliers.supplier_ID = invoices.supplier_ID " +
-                "RIGHT JOIN firms " +
+                "JOIN firms " +
                 "ON suppliers.firm_ID = firms.firm_ID " +
                 "WHERE suppliers.name =" + "'" + supplier + "' " +
-                "AND invoices.emit_Date > " + "'" + beginDate + "' " +
+                "AND invoices.emit_Date >= " + "'" + beginDate + "' " +
                 "AND firms.firm_ID = " + firmId;
 
         try {
@@ -180,12 +178,12 @@ public class DBConnection {
         } catch (Exception ex) {
             System.out.println("Unable to retrieve results. " + ex);
         }
-        closeConnection();
     }
 
     //toti userii firmei grupati pe roluri
     public void printAllUsersByRolesForFirmWithId(int firmId) {
-        String selectSql = "SELECT * FROM users RIGHT JOIN firms ON users.firm_ID = firms.firm_ID " +
+        String selectSql = "SELECT * FROM users " +
+                "JOIN firms ON users.firm_ID = firms.firm_ID " +
                 "WHERE users.firm_ID = " + firmId +
                 " ORDER BY users.role;";
         try {
@@ -204,15 +202,14 @@ public class DBConnection {
         } catch (Exception ex) {
             System.out.println("Unable to retrieve results. " + ex);
         }
-        closeConnection();
     }
 
     //numele tuturor furnizorilor pe care i-am platit cu cash in ultimele doua luni
     public void printAllSupplierNamesByPaymentFromDateForFirmWithId(String payment, String date, int firmId) {
         String selectSql = "SELECT * FROM suppliers " +
-                "RIGHT JOIN firms ON firms.firm_ID = suppliers.firm_ID " +
-                "RIGHT JOIN invoices ON suppliers.supplier_ID = invoices.supplier_ID " +
-                "RIGHT JOIN payments ON invoices.invoice_ID = payments.invoice_ID " +
+                "JOIN firms ON firms.firm_ID = suppliers.firm_ID " +
+                "JOIN invoices ON suppliers.supplier_ID = invoices.supplier_ID " +
+                "JOIN payments ON invoices.invoice_ID = payments.invoice_ID " +
                 "WHERE payments.type = " + "'" + payment + "' " +
                 "AND payments.date > " + "'" + date + "' " +
                 "AND firms.firm_ID = " + firmId;
@@ -230,16 +227,16 @@ public class DBConnection {
         } catch (Exception ex) {
             System.out.println("Unable to retrieve results. " + ex);
         }
-        closeConnection();
     }
-
-    public void printTotalPaymentsToSupplierDescForFirmWithId(int firmId) {
-        String selectSql = " SELECT suppliers.name, SUM(payments.value) FROM payments " +
-                "RIGHT JOIN invoices ON invoices.invoice_ID = payments.invoice_ID " +
-                "RIGHT JOIN suppliers ON suppliers.supplier_ID = invoices.supplier_ID " +
-                "RIGHT JOIN firms ON firms.firm_ID = suppliers.firm_ID " +
+    //sumele platite catre fiecare furnizor in ultimele luni ordonate dupa suma totala cel mai mult primu
+    public void printTotalPaymentsToSupplierDescFromDateForFirmWithId(String beginDate, int firmId) {
+        String selectSql = "SELECT suppliers.name, SUM(payments.value) FROM payments " +
+                "JOIN invoices ON invoices.invoice_ID = payments.invoice_ID " +
+                "JOIN suppliers ON suppliers.supplier_ID = invoices.supplier_ID " +
+                "JOIN firms ON firms.firm_ID = suppliers.firm_ID " +
                 "WHERE firms.firm_ID = " + firmId +
-                " GROUP BY suppliers.name " +
+                " AND invoices.emit_Date >= " + "'" + beginDate + "' " +
+                "GROUP BY suppliers.name " +
                 "ORDER BY SUM(payments.value) DESC;";
         try {
             ResultSet resultSet = statement.executeQuery(selectSql);

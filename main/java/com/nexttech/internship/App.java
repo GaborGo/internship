@@ -12,12 +12,13 @@ public class App {
         //LoopsAndConditions.startGuessTheNumberImproved();
          DBConnection connection = new DBConnection();
         //connection.printAllUserNames();
-        //connection.printAllInvoicesPayedOnlineForFirmWithId(1);
-        //connection.printAllScadentInvoicesOrderedByPastDueTimeForFirmWithId(2);
-        //connection.printAllInvoicesFromSupplierForFirmWithId("Electrica", 2);
-        //connection.printAllInvoicesFromDateForSupplierForFirmWithId("2019-11-17", "Orange", 1);
-        connection.printAllUsersByRolesForFirmWithId(3);
-        //connection.printAllSupplierNamesByPaymentFromDateForFirmWithId("cash", "2020-09-17", 1);
-        //connection.printTotalPaymentsToSupplierDescForFirmWithId(1);
+        //connection.printAllInvoicesByPaymentTypeForFirmWithId("cash",3);
+        //connection.printAllScadentInvoicesOrderedByDueTimeForFirmWithId(3);
+        //connection.printAllInvoicesFromSupplierForFirmWithId("Orange", 2);
+        //connection.printAllInvoicesFromDateForSupplierForFirmWithId("2020-10-10", "Orange", 1);
+        //connection.printAllUsersByRolesForFirmWithId(3);
+        //connection.printAllSupplierNamesByPaymentFromDateForFirmWithId("cash", "2019-09-17", 2);
+        //connection.printTotalPaymentsToSupplierDescFromDateForFirmWithId("2020-06-10",1);
+        connection.closeConnection();
     }
 }
