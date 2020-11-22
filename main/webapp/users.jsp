@@ -48,15 +48,17 @@
     </tr>
     </c:forEach>
     <form action="${pageContext.request.contextPath}/users" method="post">
-    <tr>
-        <td><input type="number" name="userId" id="userId" size="au" required></td>
-        <td><input name="username" id="username" type="text" size="10" required></td>
-        <td><input name="password" id="password" type="text" size="10" required></td>
-        <td><input name="email" id="email" type="text" size="10" required></td>
-        <td><input name="role" id="role" type="text" size="10" required></td>
-        <td><input name="firmId" id="firmId" type="number" size="4" required></td>
-        <td><button name="submitUserUpdate" type="submit" formmethod="post">Add user</button></td>
-    </tr>
+        <tr>
+            <td><input type="number" name="userId" id="userId" size="au" required></td>
+            <td><input name="username" id="username" type="text" size="10" required></td>
+            <td><input name="password" id="password" type="text" size="10" required></td>
+            <td><input name="email" id="email" type="text" size="10" required></td>
+            <td><input name="role" id="role" type="text" size="10" required></td>
+            <td><input name="firmId" id="firmId" type="number" size="4" required></td>
+            <td>
+                <button name="submitUserUpdate" type="submit" formmethod="post">Add user</button>
+            </td>
+        </tr>
     </form>
 </table>
 </body>

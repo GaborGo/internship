@@ -11,7 +11,7 @@
     <label for="username">Username</label>
     <input name="username" id="username" type="text" value="${user.getUsername()}">
     <label for="password">Password</label>
-    <input name ="password" id="password" type="text" value="${user.getPassword()}">
+    <input name="password" id="password" type="text" value="${user.getPassword()}">
     <label for="email">Email</label>
     <input name="email" id="email" type="text" value="${user.getEmail()}">
     <label for="role">Role</label>
