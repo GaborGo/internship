@@ -1,4 +1,4 @@
-package com.nexttech.internship.contApp;
+package com.nexttech.internship.contApp.model;
 
 public class User {
     private int id;
@@ -7,6 +7,9 @@ public class User {
     private String password;
     private String email;
     private String role;
+
+    public User() {
+    }
 
     public User(int id, int firmId, String username, String password, String email, String role) {
         this.id = id;

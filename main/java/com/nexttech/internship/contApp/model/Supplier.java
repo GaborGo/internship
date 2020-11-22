@@ -1,14 +1,16 @@
-package com.nexttech.internship.contApp;
+package com.nexttech.internship.contApp.model;
 
 public class Supplier {
     private int id;
     private String name;
-    private int firmID;
+    private int firmId;
 
-    public Supplier(int id, String name, int firmID) {
+    public Supplier() {}
+
+    public Supplier(int id, String name, int firmId) {
         this.id = id;
         this.name = name;
-        this.firmID = firmID;
+        this.firmId = firmId;
     }
 
     public int getId() {
@@ -27,11 +29,11 @@ public class Supplier {
         this.name = name;
     }
 
-    public int getFirmID() {
-        return firmID;
+    public int getFirmId() {
+        return firmId;
     }
 
-    public void setFirmID(int firmID) {
-        this.firmID = firmID;
+    public void setFirmId(int firmId) {
+        this.firmId = firmId;
     }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <description>
+        Servlet and JSP Examples.
+    </description>
+
+<!--    <servlet>-->
+<!--        <servlet-name>SimpleServlet</servlet-name>-->
+<!--        <servlet-class>com.nexttech.internship.contApp.servlets.SimpleServlet</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>ProductName</param-name>-->
+<!--            <param-value>Another product name xml </param-value>-->
+<!--        </init-param>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>SimpleServlet</servlet-name>-->
+<!--        <url-pattern>/other</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <servlet>-->
+<!--        <servlet-name>ControllerServlet</servlet-name>-->
+<!--        <servlet-class>com.nexttech.internship.contApp.servlets.ControllerServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>ControllerServlet</servlet-name>-->
+<!--        <url-pattern>*.do</url-pattern>-->
+<!--    </servlet-mapping>-->
+<!--    <servlet>-->
+<!--        <servlet-name>Simple</servlet-name>-->
+<!--        <servlet-class>com.nexttech.internship.contApp.servlets.SimpleServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Simple</servlet-name>-->
+<!--        <url-pattern>*.do</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <error-page>-->
+<!--        <location>/WEB-INF/errorpage.jsp</location>-->
+<!--    </error-page>-->
+</web-app>

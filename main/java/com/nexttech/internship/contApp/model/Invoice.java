@@ -1,4 +1,4 @@
-package com.nexttech.internship.contApp;
+package com.nexttech.internship.contApp.model;
 
 import java.sql.Date;
 
@@ -10,6 +10,8 @@ public class Invoice {
     private int value;
     private int sold;
     private int supplierId;
+
+    public Invoice() {}
 
     public Invoice(int id, int number, Date emitDate, Date scadentDate, int value, int sold, int supplierId) {
         this.id = id;

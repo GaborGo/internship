@@ -1,4 +1,4 @@
-package com.nexttech.internship.contApp;
+package com.nexttech.internship.contApp.model;
 
 public class Firm {
     private int id;

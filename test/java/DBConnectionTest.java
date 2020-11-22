@@ -1,4 +1,4 @@
-import com.nexttech.internship.JDBC.DBConnection;
+import com.nexttech.internship.contApp.JDBC.DBConnection;
 import org.junit.jupiter.api.Test;
 
 public class DBConnectionTest {

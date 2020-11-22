@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config" status="debug" name="LoggingConfig">
+    <Appenders>
+        <Appender type="file" name="File" fileName="${sys:catalina.base}/logs/catalina.2020-11-19.log"></Appender>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="File"></AppenderRef>
+        </Root>
+    </Loggers>
+</Configuration>
